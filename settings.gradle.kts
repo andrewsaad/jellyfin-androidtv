@@ -10,6 +10,7 @@ include(":playback:core")
 include(":playback:jellyfin")
 include(":playback:media3:exoplayer")
 include(":playback:media3:session")
+include(":playback:media3:surround-upmix")
 include(":preference")
 
 pluginManagement {
