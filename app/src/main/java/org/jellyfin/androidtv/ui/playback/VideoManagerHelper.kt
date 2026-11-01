@@ -30,11 +30,15 @@ fun getSubtitleMediaStreamCodec(stream: MediaStream): String {
 
 /**
  * Wrap [sink] so stereo audio is upmixed to 5.1 Dolby Digital while the surround upmix preference is enabled.
- * The preference is read each time the audio output is configured.
+ * The preferences are read each time the audio output is configured.
  */
 @OptIn(UnstableApi::class)
 fun createUpmixAudioSink(sink: AudioSink, userPreferences: UserPreferences): AudioSink =
-	UpmixAudioSink(sink, { userPreferences[UserPreferences.surroundUpmixEnabled] })
+	UpmixAudioSink(
+		delegate = sink,
+		enabled = { userPreferences[UserPreferences.surroundUpmixEnabled] },
+		latencyOffsetUs = { userPreferences[UserPreferences.surroundUpmixOffsetMs] * 1000L },
+	)
 
 private var audioEffect: AudioEffect? = null
 

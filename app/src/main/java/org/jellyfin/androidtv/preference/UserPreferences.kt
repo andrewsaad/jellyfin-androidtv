@@ -130,6 +130,11 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 */
 		var surroundUpmixEnabled = booleanPreference("pref_surround_upmix", true)
 
+		/**
+		 * Lip-sync offset for upmixed audio in milliseconds: how far the TV and soundbar delay Dolby passthrough
+		 */
+		var surroundUpmixOffsetMs = intPreference("pref_surround_upmix_offset_ms", 200)
+
 		/* Live TV */
 		/**
 		 * Use direct play

@@ -80,7 +80,13 @@ class ExoPlayerBackend(
 				enableFloatOutput: Boolean,
 				enableAudioTrackPlaybackParams: Boolean,
 			): AudioSink? = super.buildAudioSink(context, enableFloatOutput, enableAudioTrackPlaybackParams)
-				?.let { sink -> UpmixAudioSink(sink, exoPlayerOptions.surroundUpmixEnabled) }
+				?.let { sink ->
+					UpmixAudioSink(
+						delegate = sink,
+						enabled = exoPlayerOptions.surroundUpmixEnabled,
+						latencyOffsetUs = exoPlayerOptions.surroundUpmixOffsetUs,
+					)
+				}
 		}.apply {
 			setEnableDecoderFallback(true)
 			setExtensionRendererMode(

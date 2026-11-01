@@ -74,6 +74,7 @@ fun Scope.createPlaybackManager() = playbackManager(androidContext()) {
 		enableDebugLogging = userPreferences[UserPreferences.debuggingEnabled],
 		baseDataSourceFactory = get<HttpDataSource.Factory>(),
 		surroundUpmixEnabled = { userPreferences[UserPreferences.surroundUpmixEnabled] },
+		surroundUpmixOffsetUs = { userPreferences[UserPreferences.surroundUpmixOffsetMs] * 1000L },
 	)
 	install(exoPlayerPlugin(get(), exoPlayerOptions))
 

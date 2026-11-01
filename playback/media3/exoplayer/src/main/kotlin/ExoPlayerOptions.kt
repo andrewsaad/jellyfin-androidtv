@@ -9,4 +9,6 @@ data class ExoPlayerOptions(
 	val baseDataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory(),
 	/** Read when audio is configured: upmix stereo to 5.1 Dolby Digital (AC-3) when the output accepts it. */
 	val surroundUpmixEnabled: () -> Boolean = { false },
+	/** Read when audio is configured: lip-sync offset subtracted from the position while upmixing. */
+	val surroundUpmixOffsetUs: () -> Long = { 0L },
 )
