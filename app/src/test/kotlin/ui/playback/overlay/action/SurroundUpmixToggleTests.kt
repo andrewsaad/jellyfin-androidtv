@@ -62,6 +62,14 @@ class SurroundUpmixToggleTests : FunSpec({
 		SurroundUpmixToggle.appliesTo(streams, 1) shouldBe true
 	}
 
+	test("appliesTo uses the default audio stream before one is selected") {
+		val streams = listOf(stream(MediaStreamType.AUDIO, 1, 2), stream(MediaStreamType.AUDIO, 2, 6))
+
+		SurroundUpmixToggle.appliesTo(streams, -1, 2) shouldBe false
+		SurroundUpmixToggle.appliesTo(streams, -1, 1) shouldBe true
+		SurroundUpmixToggle.appliesTo(streams, 1, 2) shouldBe true
+	}
+
 	test("appliesTo is true when the stream or channel count is unknown") {
 		SurroundUpmixToggle.appliesTo(null, 1) shouldBe true
 		SurroundUpmixToggle.appliesTo(listOf(stream(MediaStreamType.AUDIO, 1, 6)), -1) shouldBe true

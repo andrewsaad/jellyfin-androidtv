@@ -65,11 +65,14 @@ object SurroundUpmixToggle {
 
 	/**
 	 * The upmix only touches stereo (or mono) audio, so the toggle is only useful when the selected audio
-	 * stream has at most 2 channels. Unknown streams or channel counts are treated as applicable.
+	 * stream has at most 2 channels. Unknown streams or channel counts are treated as applicable. Before playback
+	 * options exist (the overlay is built first) no stream is selected yet (index < 0); the source's default is used.
 	 */
 	@JvmStatic
-	fun appliesTo(mediaStreams: List<MediaStream>?, audioStreamIndex: Int): Boolean {
-		val stream = mediaStreams?.firstOrNull { it.type == MediaStreamType.AUDIO && it.index == audioStreamIndex }
+	@JvmOverloads
+	fun appliesTo(mediaStreams: List<MediaStream>?, audioStreamIndex: Int, defaultAudioStreamIndex: Int? = null): Boolean {
+		val index = if (audioStreamIndex < 0 && defaultAudioStreamIndex != null) defaultAudioStreamIndex else audioStreamIndex
+		val stream = mediaStreams?.firstOrNull { it.type == MediaStreamType.AUDIO && it.index == index }
 		val channels = stream?.channels ?: return true
 		return channels <= 2
 	}

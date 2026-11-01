@@ -692,7 +692,7 @@ public class PlaybackController implements PlaybackControllerNotifiable {
         // Use DefaultAudioStreamIndex for transcoding since they are encoded with only one stream
         //
         // Otherwise, query the players
-        if (mCurrentOptions.getAudioStreamIndex() != null) {
+        if (mCurrentOptions != null && mCurrentOptions.getAudioStreamIndex() != null) {
             currIndex = mCurrentOptions.getAudioStreamIndex();
         } else if (isTranscoding() && getCurrentMediaSource().getDefaultAudioStreamIndex() != null) {
             currIndex = getCurrentMediaSource().getDefaultAudioStreamIndex();

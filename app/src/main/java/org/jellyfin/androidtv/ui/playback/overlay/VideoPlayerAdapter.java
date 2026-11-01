@@ -113,7 +113,8 @@ public class VideoPlayerAdapter extends PlayerAdapter {
         if (playbackController.getCurrentlyPlayingItem() == null) return true;
         MediaSourceInfo mediaSource = playbackController.getCurrentMediaSource();
         if (mediaSource == null) return true;
-        return SurroundUpmixToggle.appliesTo(mediaSource.getMediaStreams(), playbackController.getAudioStreamIndex());
+        return SurroundUpmixToggle.appliesTo(mediaSource.getMediaStreams(), playbackController.getAudioStreamIndex(),
+                mediaSource.getDefaultAudioStreamIndex());
     }
 
     boolean hasNextItem() {
