@@ -6,6 +6,7 @@ import androidx.leanback.media.PlayerAdapter;
 import org.jellyfin.androidtv.auth.repository.UserRepository;
 import org.jellyfin.androidtv.ui.playback.CustomPlaybackOverlayFragment;
 import org.jellyfin.androidtv.ui.playback.PlaybackController;
+import org.jellyfin.androidtv.ui.playback.overlay.action.SurroundUpmixToggle;
 import org.jellyfin.androidtv.util.Utils;
 import org.jellyfin.androidtv.util.apiclient.StreamHelper;
 import org.jellyfin.sdk.model.api.ChapterInfo;
@@ -106,6 +107,13 @@ public class VideoPlayerAdapter extends PlayerAdapter {
 
     public boolean hasMultiAudio() {
         return StreamHelper.getAudioStreams(playbackController.getCurrentMediaSource()).size() > 1;
+    }
+
+    boolean canUpmixAudio() {
+        if (playbackController.getCurrentlyPlayingItem() == null) return true;
+        MediaSourceInfo mediaSource = playbackController.getCurrentMediaSource();
+        if (mediaSource == null) return true;
+        return SurroundUpmixToggle.appliesTo(mediaSource.getMediaStreams(), playbackController.getAudioStreamIndex());
     }
 
     boolean hasNextItem() {

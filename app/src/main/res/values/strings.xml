@@ -184,6 +184,8 @@
     <string name="desc_audio_night_mode">Levels out audio volume automatically</string>
     <string name="pref_surround_upmix">Upmix stereo to 5.1 (Dolby)</string>
     <string name="desc_surround_upmix">Sends stereo audio as Dolby Digital 5.1 so surround speakers play too</string>
+    <string name="lbl_surround_on">Surround: On</string>
+    <string name="lbl_surround_off">Surround: Off</string>
     <string name="lbl_zoom">Zoom</string>
     <string name="lbl_auto_crop">Auto crop</string>
     <string name="lbl_stretch">Stretch</string>
