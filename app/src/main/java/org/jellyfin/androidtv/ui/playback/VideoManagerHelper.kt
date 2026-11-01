@@ -4,7 +4,12 @@ import android.media.audiofx.AudioEffect
 import android.media.audiofx.DynamicsProcessing
 import android.media.audiofx.Equalizer
 import android.os.Build
+import androidx.annotation.OptIn
 import androidx.core.net.toUri
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.audio.AudioSink
+import com.streamvault.surround.UpmixAudioSink
+import org.jellyfin.androidtv.preference.UserPreferences
 import org.jellyfin.playback.media3.exoplayer.mapping.getFfmpegSubtitleMimeType
 import org.jellyfin.sdk.model.api.MediaStream
 import timber.log.Timber
@@ -22,6 +27,14 @@ fun getSubtitleMediaStreamCodec(stream: MediaStream): String {
 
 	return urlExtensionMediaType ?: codecMediaType ?: urlSubtitleExtension ?: codec
 }
+
+/**
+ * Wrap [sink] so stereo audio is upmixed to 5.1 Dolby Digital while the surround upmix preference is enabled.
+ * The preference is read each time the audio output is configured.
+ */
+@OptIn(UnstableApi::class)
+fun createUpmixAudioSink(sink: AudioSink, userPreferences: UserPreferences): AudioSink =
+	UpmixAudioSink(sink, { userPreferences[UserPreferences.surroundUpmixEnabled] })
 
 private var audioEffect: AudioEffect? = null
 

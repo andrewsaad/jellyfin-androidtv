@@ -24,6 +24,7 @@ android {
 dependencies {
 	// Jellyfin
 	implementation(projects.playback.core)
+	implementation(projects.playback.media3.surroundUpmix)
 
 	// Kotlin
 	implementation(libs.kotlinx.coroutines)

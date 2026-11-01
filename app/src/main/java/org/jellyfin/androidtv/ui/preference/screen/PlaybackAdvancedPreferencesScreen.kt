@@ -133,6 +133,12 @@ class PlaybackAdvancedPreferencesScreen : OptionsFragment() {
 				setContent(R.string.desc_bitstream_ac3)
 				bind(userPreferences, UserPreferences.ac3Enabled)
 			}
+
+			checkbox {
+				setTitle(R.string.pref_surround_upmix)
+				setContent(R.string.desc_surround_upmix)
+				bind(userPreferences, UserPreferences.surroundUpmixEnabled)
+			}
 		}
 
 		category {

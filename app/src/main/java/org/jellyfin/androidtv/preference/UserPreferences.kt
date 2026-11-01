@@ -125,6 +125,11 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 */
 		var ac3Enabled = booleanPreference("pref_bitstream_ac3", true)
 
+		/**
+		 * Upmix stereo audio to 5.1 and send it as Dolby Digital (AC-3) so surround speakers play stereo content
+		 */
+		var surroundUpmixEnabled = booleanPreference("pref_surround_upmix", true)
+
 		/* Live TV */
 		/**
 		 * Use direct play

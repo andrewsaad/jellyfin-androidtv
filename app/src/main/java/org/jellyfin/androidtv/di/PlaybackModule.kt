@@ -73,6 +73,7 @@ fun Scope.createPlaybackManager() = playbackManager(androidContext()) {
 		preferFfmpeg = userPreferences[UserPreferences.preferExoPlayerFfmpeg],
 		enableDebugLogging = userPreferences[UserPreferences.debuggingEnabled],
 		baseDataSourceFactory = get<HttpDataSource.Factory>(),
+		surroundUpmixEnabled = { userPreferences[UserPreferences.surroundUpmixEnabled] },
 	)
 	install(exoPlayerPlugin(get(), exoPlayerOptions))
 
